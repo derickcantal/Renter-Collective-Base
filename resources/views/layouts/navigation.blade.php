@@ -1,19 +1,50 @@
 <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
+        <div class="flex justify-between h-17">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('dashboard.index') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard.index')">
                         {{ __('Dashboard') }}
+                    </x-nav-link>
+                </div>
+                @if(auth()->user()->accesstype == 'Administrator' or auth()->user()->accesstype == 'Supervisor')
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                        {{ __('Users') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('renters.index')" :active="request()->routeIs('renters.index')">
+                        {{ __('Renters') }}
+                    </x-nav-link>
+                </div>
+                @endif
+                @if(auth()->user()->accesstype == 'Renters')
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('mycabinet.index')" :active="request()->routeIs('mycabinet.index')">
+                        {{ __('My Account') }}
+                    </x-nav-link>
+                </div>
+                @endif
+                @if(auth()->user()->accesstype != 'Renters')
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.index')">
+                        {{ __('Cashier') }}
+                    </x-nav-link>
+                </div>
+                @endif
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('reports.index')" :active="request()->routeIs('reports.index')">
+                        {{ __('Reports') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -23,7 +54,7 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+                            <div>Hi, {{ Auth::user()->username }}</div>
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -34,20 +65,54 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                        <x-dropdown-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard.index')">
+                            {{ __('Dashboard') }}
                         </x-dropdown-link>
-
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                        @if(auth()->user()->accesstype == 'Administrator' or auth()->user()->accesstype == 'Supervisor')
+                        <x-dropdown-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                            {{ __('Users') }}
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('renters.index')" :active="request()->routeIs('renters.index')">
+                            {{ __('Renters') }}
+                        </x-dropdown-link>
+                        @endif
+                        @if(auth()->user()->accesstype == 'Renters')
+                        <x-dropdown-link :href="route('mycabinet.index')" :active="request()->routeIs('mycabinet.index')">
+                            {{ __('My Account') }}
+                        </x-dropdown-link>
+                        @endif
+                        @if(auth()->user()->accesstype != 'Renters')
+                        <x-dropdown-link :href="route('sales.index')" :active="request()->routeIs('sales.index')">
+                            {{ __('Cashier') }}
+                        </x-dropdown-link>
+                        @endif
+                        <x-dropdown-link :href="route('reports.index')" :active="request()->routeIs('reports.index')">
+                            {{ __('Reports') }}
+                        </x-dropdown-link>
+                        <div class="pt-1 pb-1 border-t border-gray-200 dark:border-gray-600">
+                            @if(auth()->user()->accesstype == 'Cashier')
+                            <x-dropdown-link :href="route('saleseod.index')">
+                                {{ __('EOD') }}
                             </x-dropdown-link>
-                        </form>
+                            @endif
+                            @if(auth()->user()->accesstype == 'Administrator' or auth()->user()->accesstype == 'Supervisor')
+                            <x-dropdown-link :href="route('branch.index')">
+                                {{ __('Settings') }}
+                            </x-dropdown-link>
+                            @endif
+                            <x-dropdown-link :href="route('profile.edit')">
+                                {{ __('Profile') }}
+                            </x-dropdown-link>
+                            <!-- Authentication -->
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <x-dropdown-link :href="route('logout')"
+                                        onclick="event.preventDefault();
+                                                    this.closest('form').submit();">
+                                    {{ __('Log Out') }}
+                                </x-dropdown-link>
+                            </form>
+                        </div>
                     </x-slot>
                 </x-dropdown>
             </div>
@@ -67,19 +132,60 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard.index')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+        </div>
+        @if(auth()->user()->accesstype == 'Administrator' or auth()->user()->accesstype == 'Supervisor')
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                {{ __('Users') }}
+            </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('renters.index')" :active="request()->routeIs('renters.index')">
+                {{ __('Renters') }}
+            </x-responsive-nav-link>
+        </div>
+        @endif
+        @if(auth()->user()->accesstype == 'Renters')
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('mycabinet.index')" :active="request()->routeIs('mycabinet.index')">
+                {{ __('My Account') }}
+            </x-responsive-nav-link>
+        </div>
+        @endif
+        @if(auth()->user()->accesstype != 'Renters')
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.index')">
+                {{ __('Cashier') }}
+            </x-responsive-nav-link>
+        </div>
+        @endif
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('reports.index')" :active="request()->routeIs('reports.index')">
+                {{ __('Reports') }}
             </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="px-4">
-                <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
+                <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->username }}</div>
                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
             </div>
 
             <div class="mt-3 space-y-1">
+                   @if(auth()->user()->accesstype == 'Cashier')
+                    <x-responsive-nav-link :href="route('saleseod.index')">
+                        {{ __('EOD') }}
+                    </x-responsive-nav-link>
+                @endif
+                @if(auth()->user()->accesstype == 'Administrator' or auth()->user()->accesstype == 'Supervisor')
+                <x-responsive-nav-link :href="route('branch.index')">
+                    {{ __('Settings') }}
+                </x-responsive-nav-link>
+                @endif
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>

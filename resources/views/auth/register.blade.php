@@ -62,7 +62,7 @@
 
          <!-- mobileno1 -->
          <div class="mt-4">
-            <x-input-label for="mobile_primary" :value="__('Mobile No.')" />
+            <x-input-label for="mobile_primary" :value="__('Mobile No. (ex. 09XX1231234)')" />
             <x-text-input id="mobile_primary" class="block mt-1 w-full" type="text" name="mobile_primary" :value="old('mobile_primary')" required autofocus autocomplete="off" />
             <x-input-error :messages="$errors->get('mobile_primary')" class="mt-2" />
         </div>

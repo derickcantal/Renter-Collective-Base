@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use \Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class RegisteredUserController extends Controller
 {
@@ -21,6 +22,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
+      
         $branch = branch::orderBy('branchname', 'asc')->get();
         return view('auth.register',['branch' => $branch]);
     }
@@ -63,7 +65,7 @@ class RegisteredUserController extends Controller
             'updated_by' => 'Null', 
             'timerecorded' => $timenow,
             'mod' => 0,
-            'status' => 'Active',
+            'status' => 'Inactive',
         ]);
 
         event(new Registered($renter));
