@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use App\Models\history_sales;
 use App\Models\history_sales_requests;
-use App\Models\history_attendance;
 use App\Models\history_rental_payments;
 use App\Models\user_login_log;
 use \Carbon\Carbon;
@@ -236,12 +235,10 @@ class ReportsController extends Controller
                 
                 $rentalpayments = history_rental_payments::where('branchname',auth()->user()->branchname)->orderBy('status','desc')->paginate(5);
     
-                $attendance = history_attendance::where('branchname',auth()->user()->branchname)->latest()->paginate(5); 
                 
     
                 return view('reports.index')->with(['sales' => $sales])
                     ->with(['sales_requests' => $sales_requests])
-                    ->with(['attendance' => $attendance])
                     ->with(['rentalpayments' => $rentalpayments])
                     ->with(['totalsales' => $totalsales])
                     ->with(['totalqty' => $totalqty])
@@ -273,13 +270,11 @@ class ReportsController extends Controller
                 
                 $rentalpayments = history_rental_payments::where('branchname',auth()->user()->branchname)->orderBy('status','desc')->paginate(5);
     
-                $attendance = history_attendance::where('branchname',auth()->user()->branchname)->latest()->paginate(5); 
                 
                 $branch = branch::orderBy('branchname', 'asc')->get();
 
                 return view('reports.index')->with(['sales' => $sales])
                     ->with(['sales_requests' => $sales_requests])
-                    ->with(['attendance' => $attendance])
                     ->with(['rentalpayments' => $rentalpayments])
                     ->with(['totalsales' => $totalsales])
                     ->with(['totalqty' => $totalqty])
@@ -325,11 +320,9 @@ class ReportsController extends Controller
         
             $rentalpayments = history_rental_payments::where('branchname',auth()->user()->branchname)->orderBy('status','desc')->paginate(5);
 
-            $attendance = history_attendance::paginate(5); 
 
             return view('reports.index')->with(['sales' => $sales])
                 ->with(['sales_requests' => $sales_requests])
-                ->with(['attendance' => $attendance])
                 ->with(['rentalpayments' => $rentalpayments])
                 ->with(['totalsales' => $totalsales])
                 ->with(['totalqty' => $totalqty]);
@@ -376,12 +369,10 @@ class ReportsController extends Controller
                 
                 $rentalpayments = history_rental_payments::where('userid',auth()->user()->userid)->orderBy('status','desc')->paginate(5);
     
-                $attendance = history_attendance::where('userid',auth()->user()->userid)->latest()->paginate(5); 
                 
     
                 return view('reports.index')->with(['sales' => $sales])
                     ->with(['sales_requests' => $sales_requests])
-                    ->with(['attendance' => $attendance])
                     ->with(['rentalpayments' => $rentalpayments])
                     ->with(['totalsales' => $totalsales])
                     ->with(['totalqty' => $totalqty])
@@ -413,13 +404,11 @@ class ReportsController extends Controller
                 
                 $rentalpayments = history_rental_payments::where('userid',auth()->user()->userid)->orderBy('status','desc')->paginate(5);
     
-                $attendance = history_attendance::where('userid',auth()->user()->userid)->latest()->paginate(5); 
                 
                 $branch = branch::orderBy('branchname', 'asc')->get();
 
                 return view('reports.index')->with(['sales' => $sales])
                     ->with(['sales_requests' => $sales_requests])
-                    ->with(['attendance' => $attendance])
                     ->with(['rentalpayments' => $rentalpayments])
                     ->with(['totalsales' => $totalsales])
                     ->with(['totalqty' => $totalqty])
@@ -465,11 +454,9 @@ class ReportsController extends Controller
         
             $rentalpayments = history_rental_payments::where('userid',auth()->user()->userid)->orderBy('status','desc')->paginate(5);
 
-            $attendance = history_attendance::paginate(5); 
 
             return view('reports.index')->with(['sales' => $sales])
                 ->with(['sales_requests' => $sales_requests])
-                ->with(['attendance' => $attendance])
                 ->with(['rentalpayments' => $rentalpayments])
                 ->with(['totalsales' => $totalsales])
                 ->with(['totalqty' => $totalqty]);
@@ -513,12 +500,10 @@ class ReportsController extends Controller
                 
                 $rentalpayments = history_rental_payments::latest()->paginate(5);
     
-                $attendance = history_attendance::latest()->paginate(5); 
                 
     
                 return view('reports.index')->with(['sales' => $sales])
                     ->with(['sales_requests' => $sales_requests])
-                    ->with(['attendance' => $attendance])
                     ->with(['rentalpayments' => $rentalpayments])
                     ->with(['totalsales' => $totalsales])
                     ->with(['totalqty' => $totalqty])
@@ -548,13 +533,11 @@ class ReportsController extends Controller
                 
                 $rentalpayments = history_rental_payments::latest()->paginate(5);
     
-                $attendance = history_attendance::latest()->paginate(5); 
                 
                 $branch = branch::orderBy('branchname', 'asc')->get();
 
                 return view('reports.index')->with(['sales' => $sales])
                     ->with(['sales_requests' => $sales_requests])
-                    ->with(['attendance' => $attendance])
                     ->with(['rentalpayments' => $rentalpayments])
                     ->with(['totalsales' => $totalsales])
                     ->with(['totalqty' => $totalqty])
@@ -598,13 +581,11 @@ class ReportsController extends Controller
         
             $rentalpayments = history_rental_payments::latest()->paginate(5);
 
-            $attendance = history_attendance::latest()->paginate(5); 
 
             $branch = branch::orderBy('branchname', 'asc')->get();
 
             return view('reports.index')->with(['sales' => $sales])
                 ->with(['sales_requests' => $sales_requests])
-                ->with(['attendance' => $attendance])
                 ->with(['branch' => $branch])
                 ->with(['rentalpayments' => $rentalpayments])
                 ->with(['totalsales' => $totalsales])
@@ -633,7 +614,6 @@ class ReportsController extends Controller
                 
                 $rentalpayments = history_rental_payments::latest()->paginate(5);
     
-                $attendance = history_attendance::latest()->paginate(5);   
 
             }elseif(auth()->user()->accesstype =='Renters'){
                 $salesget = history_sales::where('userid',auth()->user()->userid)
@@ -652,7 +632,6 @@ class ReportsController extends Controller
                 
                 $rentalpayments = history_rental_payments::latest()->paginate(5);
     
-                $attendance = history_attendance::latest()->paginate(5);   
             }elseif(auth()->user()->accesstype =='Supervisor'){
                 $salesget = history_sales::latest()
                                         ->get();
@@ -668,7 +647,6 @@ class ReportsController extends Controller
                 
                 $rentalpayments = history_rental_payments::latest()->paginate(5);
     
-                $attendance = history_attendance::latest()->paginate(5); 
 
             }elseif(auth()->user()->accesstype =='Administrator'){
                 $salesget = history_sales::latest()
@@ -685,7 +663,6 @@ class ReportsController extends Controller
                 
                 $rentalpayments = history_rental_payments::latest()->paginate(5);
     
-                $attendance = history_attendance::latest()->paginate(5); 
             }
 
             $userlog = user_login_log::query()->create([
@@ -707,7 +684,6 @@ class ReportsController extends Controller
             ]);
             return view('reports.index')->with(['sales' => $sales])
                 ->with(['sales_requests' => $sales_requests])
-                ->with(['attendance' => $attendance])
                 ->with(['branch' => $branch])
                 ->with(['rentalpayments' => $rentalpayments])
                 ->with(['totalsales' => $totalsales])

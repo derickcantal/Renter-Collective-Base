@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sales;
-use App\Models\attendance;
 use App\Models\RentalPayments;
 use App\Models\RenterRequests;
 use App\Models\user_login_log;
@@ -34,70 +33,35 @@ class DashboardController extends Controller
             'status'  => $status,
         ]);
     }
-    public function administrator(){
-        $sales = Sales::latest()->paginate(5);
-        $RenterRequests = RenterRequests::where('status','For Approval')->latest()->paginate(5);
-        
-        $rentalpayments = RentalPayments::where('status','Unpaid')->orderBy('status','desc')->paginate(5);
+     public function renters(){
 
-        $attendance = attendance::latest()->paginate(5); 
-
-        return view('dashboard.index')->with(['sales' => $sales])
-                                        ->with(['RenterRequests' => $RenterRequests])
-                                        ->with(['attendance' => $attendance])
-                                        ->with(['rentalpayments' => $rentalpayments])
-                                        ->with('i', (request()->input('page', 1) - 1) * 5);
-    }
-
-    public function renters(){
-
-        $sales = Sales::where('userid',auth()->user()->userid)
+        $sales = Sales::where('userid',auth()->user()->renterid)
                     ->where(function(Builder $builder){
                         $builder->where('collected_status','Pending')
                                 ->where('total','!=',0);
                     })->latest()->paginate(5);
 
-        $RenterRequests = RenterRequests::where('userid',auth()->user()->userid)
+        $RenterRequests = RenterRequests::where('userid',auth()->user()->renterid)
                     ->where(function(Builder $builder){
                         $builder
                                 ->orderBy('status','desc');
                     })->latest()->paginate(5);
 
-        $rentalpayments = RentalPayments::where('userid',auth()->user()->userid)
+        $rentalpayments = RentalPayments::where('userid',auth()->user()->renterid)
                     ->latest()
                     ->paginate(5);
 
-        $attendance = attendance::where('status','Renters')->paginate(5);
 
         return view('dashboard.index')->with(['sales' => $sales])
                                         ->with(['RenterRequests' => $RenterRequests])
                                         ->with(['rentalpayments' => $rentalpayments])
-                                        ->with(['attendance' => $attendance])
                                         ->with('i', (request()->input('page', 1) - 1) * 5);
 
         return redirect()->route('mydashboard.index');
 
     }
 
-    public function cashier(){
-        $sales = Sales::where('branchname',auth()->user()->branchname)
-                        ->latest()
-                        ->paginate(5);
-        $RenterRequests = RenterRequests::where('branchname',auth()->user()->branchname)
-                    ->paginate(5);
-
-        $rentalpayments = rentalpayments::where('branchname',auth()->user()->branchname)
-                    ->where(function(Builder $builder){
-                    })->latest()->paginate(5);
-
-        $attendance = attendance::where('branchname',auth()->user()->branchname)->latest()->paginate(5);
-
-        return view('dashboard.index')->with(['sales' => $sales])
-                    ->with(['RenterRequests' => $RenterRequests])
-                    ->with(['rentalpayments' => $rentalpayments])
-                    ->with(['attendance' => $attendance])
-                    ->with('i', (request()->input('page', 1) - 1) * 5);             
-    }
+  
     public function displayall()
     {
        
