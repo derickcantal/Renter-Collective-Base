@@ -35,19 +35,19 @@ class DashboardController extends Controller
     }
      public function renters(){
 
-        $sales = Sales::where('userid',auth()->user()->renterid)
+        $sales = Sales::where('userid',auth()->user()->rentersid)
                     ->where(function(Builder $builder){
                         $builder->where('collected_status','Pending')
                                 ->where('total','!=',0);
                     })->latest()->paginate(5);
 
-        $RenterRequests = RenterRequests::where('userid',auth()->user()->renterid)
+        $RenterRequests = RenterRequests::where('userid',auth()->user()->rentersid)
                     ->where(function(Builder $builder){
                         $builder
                                 ->orderBy('status','desc');
                     })->latest()->paginate(5);
 
-        $rentalpayments = RentalPayments::where('userid',auth()->user()->renterid)
+        $rentalpayments = RentalPayments::where('userid',auth()->user()->rentersid)
                     ->latest()
                     ->paginate(5);
 
