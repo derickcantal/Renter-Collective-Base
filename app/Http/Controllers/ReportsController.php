@@ -353,10 +353,10 @@ class ReportsController extends Controller
         
         if(empty($request->search)){
             if(empty($request->startdate) && empty($request->enddate)){
-                $salesget = history_sales::where('userid',auth()->user()->userid)
+                $salesget = history_sales::where('userid',auth()->user()->rentersid)
                                         ->orderBy($orderby,$orderrow)
                                         ->get();
-                $sales = history_sales::where('userid',auth()->user()->userid)
+                $sales = history_sales::where('userid',auth()->user()->rentersid)
                                         ->orderBy($orderby,$orderrow)
                                         ->paginate($request->pagerow);
 
@@ -365,9 +365,9 @@ class ReportsController extends Controller
 
                 $branch = branch::orderBy('branchname', 'asc')->get();
     
-                $sales_requests = history_sales_requests::where('userid',auth()->user()->userid)->orderBy('status','desc')->paginate(5);
+                $sales_requests = history_sales_requests::where('userid',auth()->user()->rentersid)->orderBy('status','desc')->paginate(5);
                 
-                $rentalpayments = history_rental_payments::where('userid',auth()->user()->userid)->orderBy('status','desc')->paginate(5);
+                $rentalpayments = history_rental_payments::where('userid',auth()->user()->rentersid)->orderBy('status','desc')->paginate(5);
     
                 
     
@@ -388,11 +388,11 @@ class ReportsController extends Controller
                 $startDate = Carbon::parse($request->startdate)->format('Y-m-d');
                 $endDate = Carbon::parse($request->enddate)->format('Y-m-d');
 
-                $salesget = history_sales::where('userid',auth()->user()->userid)
+                $salesget = history_sales::where('userid',auth()->user()->rentersid)
                                             ->whereBetween('timerecorded', [$startDate .' 00:00:00', $endDate .' 23:59:59'])
                                             ->orderBy($orderby,$orderrow)
                                             ->get();
-                $sales = history_sales::where('userid',auth()->user()->userid)
+                $sales = history_sales::where('userid',auth()->user()->rentersid)
                                         ->whereBetween('timerecorded', [$startDate .' 00:00:00', $endDate .' 23:59:59'])
                                         ->orderBy($orderby,$orderrow)
                                         ->paginate($request->pagerow);
@@ -400,9 +400,9 @@ class ReportsController extends Controller
                 $totalqty = collect($salesget)->sum('qty');
                 $totalsales = collect($salesget)->sum('total');
     
-                $sales_requests = history_sales_requests::where('userid',auth()->user()->userid)->orderBy('status','desc')->paginate(5);
+                $sales_requests = history_sales_requests::where('userid',auth()->user()->rentersid)->orderBy('status','desc')->paginate(5);
                 
-                $rentalpayments = history_rental_payments::where('userid',auth()->user()->userid)->orderBy('status','desc')->paginate(5);
+                $rentalpayments = history_rental_payments::where('userid',auth()->user()->rentersid)->orderBy('status','desc')->paginate(5);
     
                 
                 $branch = branch::orderBy('branchname', 'asc')->get();
@@ -417,7 +417,7 @@ class ReportsController extends Controller
             }
         }else{
 
-            $sales = history_sales::where('userid', auth()->user()->userid)
+            $sales = history_sales::where('userid', auth()->user()->rentersid)
                     ->where(function(Builder $builder) use($request){
                         $builder
                                 ->where('cabinetname','like',"%{$request->search}%")
@@ -432,7 +432,7 @@ class ReportsController extends Controller
                     ->orderBy($orderby,$orderrow)
                     ->paginate($request->pagerow);
 
-            $salesget = history_sales::where('userid', auth()->user()->userid)
+            $salesget = history_sales::where('userid', auth()->user()->rentersid)
                     ->where(function(Builder $builder) use($request){
                         $builder
                                 ->where('cabinetname','like',"%{$request->search}%")
@@ -450,9 +450,9 @@ class ReportsController extends Controller
             $totalsales = collect($salesget)->sum('total');
             $totalqty = collect($salesget)->sum('qty');
 
-            $sales_requests = history_sales_requests::where('userid',auth()->user()->userid)->orderBy('status','desc')->paginate(5);
+            $sales_requests = history_sales_requests::where('userid',auth()->user()->rentersid)->orderBy('status','desc')->paginate(5);
         
-            $rentalpayments = history_rental_payments::where('userid',auth()->user()->userid)->orderBy('status','desc')->paginate(5);
+            $rentalpayments = history_rental_payments::where('userid',auth()->user()->rentersid)->orderBy('status','desc')->paginate(5);
 
 
             return view('reports.index')->with(['sales' => $sales])
@@ -616,10 +616,10 @@ class ReportsController extends Controller
     
 
             }elseif(auth()->user()->accesstype =='Renters'){
-                $salesget = history_sales::where('userid',auth()->user()->userid)
+                $salesget = history_sales::where('userid',auth()->user()->rentersid)
                                         ->latest()
                                         ->get();
-                $sales = history_sales::where('userid',auth()->user()->userid)
+                $sales = history_sales::where('userid',auth()->user()->rentersid)
                                         ->latest()
                                         ->paginate(5);
 

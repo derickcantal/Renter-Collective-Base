@@ -38,7 +38,7 @@ class MyRentalController extends Controller
     public function search(Request $request)
     {
         if(auth()->user()->accesstype =='Renters'){
-            $cabinets = cabinet::where('userid',auth()->user()->userid)
+            $cabinets = cabinet::where('userid',auth()->user()->rentersid)
                     ->where(function(Builder $builder){
                         $builder->where('branchid',auth()->user()->branchid);
                     })
@@ -54,7 +54,7 @@ class MyRentalController extends Controller
     }
     public function loaddata(){
         $timenow = Carbon::now()->timezone('Asia/Manila')->format('Y-m-d H:i:s');
-        $cabinets = cabinet::where('userid',auth()->user()->userid)
+        $cabinets = cabinet::where('userid',auth()->user()->rentersid)
                     ->orderBy('status','asc')
                     ->orderBy('cabid','asc')
                     ->orderBy('branchname','asc')
@@ -63,10 +63,10 @@ class MyRentalController extends Controller
         return view('myrental.index',['cabinets' => $cabinets])
                     ->with('i', (request()->input('page', 1) - 1) * 5);
         
-        $RentalPayments = RentalPayments::where('userid',auth()->user()->userid)
+        $RentalPayments = RentalPayments::where('userid',auth()->user()->rentersid)
                                         ->paginate(5);
         
-        $RentalPaymentsHistory = history_rental_payments::where('userid',auth()->user()->userid)
+        $RentalPaymentsHistory = history_rental_payments::where('userid',auth()->user()->rentersid)
                     ->where(function(Builder $builder){
                         $builder->where('branchid',auth()->user()->branchid);
                     })->paginate(5);
@@ -112,7 +112,7 @@ class MyRentalController extends Controller
     public function cabinetrental(){
 
         if(auth()->user()->accesstype =='Renters'){
-            $RentalPaymentsHistory = history_rental_payments::where('userid',auth()->user()->userid)
+            $RentalPaymentsHistory = history_rental_payments::where('userid',auth()->user()->rentersid)
                     ->where(function(Builder $builder){
                         $builder->where('branchid',auth()->user()->branchid);
                     })->paginate(5);

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\RenterRequests;
 use App\Models\Sales;
-use App\Models\Renters;
+use App\Models\Renter;
 use App\Models\branch;
 use App\Models\cabinet;
 use App\Models\history_sales;
@@ -39,7 +39,7 @@ class MyRequestController extends Controller
     public function search(Request $request)
     {
         if(auth()->user()->accesstype =='Renters'){
-            $cabinets = cabinet::where('userid',auth()->user()->userid)
+            $cabinets = cabinet::where('userid',auth()->user()->rentersid)
                     ->orderBy('status','asc')
                     ->orderBy('cabid','asc')
                     ->orderBy('branchname','asc')
@@ -57,7 +57,7 @@ class MyRequestController extends Controller
 
         $timenow = Carbon::now()->timezone('Asia/Manila')->format('Y-m-d H:i:s');
         if(auth()->user()->accesstype =='Renters'){
-            $cabinets = cabinet::where('userid',auth()->user()->userid)
+            $cabinets = cabinet::where('userid',auth()->user()->rentersid)
                     ->orderBy('status','asc')
                     ->orderBy('cabid','asc')
                     ->orderBy('branchname','asc')
@@ -73,7 +73,7 @@ class MyRequestController extends Controller
                         })->paginate(5);
             
             $userlog = user_login_log::query()->create([
-                'userid' => auth()->user()->userid,
+                'userid' => auth()->user()->rentersid,
                 'username' => auth()->user()->username,
                 'firstname' => auth()->user()->firstname,
                 'middlename' => auth()->user()->middlename,
@@ -136,10 +136,10 @@ class MyRequestController extends Controller
 
             $cabinet = cabinet::where('cabid',$cabid)
             ->where(function(Builder $builder){
-                $builder->where('userid', auth()->user()->userid);
+                $builder->where('userid', auth()->user()->rentersid);
             })->first();
 
-            $renter = Renters::where('userid',$cabinet->userid)->first();
+            $renter = Renter::where('rentersid',$cabinet->userid)->first();
 
             $history_sales = history_sales::where('cabid',$cabid)
                     ->where(function(Builder $builder) use($startdate,$enddadte){
@@ -173,7 +173,7 @@ class MyRequestController extends Controller
                 'totalcollected' => 0,
                 'avatarproof' => 'avatars/cash-default.jpg',
                 'rnotes' => $rnotes,
-                'userid' => $renter->userid,
+                'userid' => $renter->rentersid,
                 'firstname' => $renter->firstname,
                 'lastname' => $renter->lastname,
                 'rstartdate' => $request->startdate,
@@ -200,7 +200,7 @@ class MyRequestController extends Controller
             if ($RenterRequests) {
                 //query successful
                 $userlog = user_login_log::query()->create([
-                    'userid' => auth()->user()->userid,
+                    'userid' => auth()->user()->rentersid,
                     'username' => auth()->user()->username,
                     'firstname' => auth()->user()->firstname,
                     'middlename' => auth()->user()->middlename,
@@ -220,7 +220,7 @@ class MyRequestController extends Controller
                             ->with('success','Sales Request created successfully.');
             }else{
                 $userlog = user_login_log::query()->create([
-                    'userid' => auth()->user()->userid,
+                    'userid' => auth()->user()->rentersid,
                     'username' => auth()->user()->username,
                     'firstname' => auth()->user()->firstname,
                     'middlename' => auth()->user()->middlename,
@@ -289,10 +289,10 @@ class MyRequestController extends Controller
                             ->latest()
                             ->first();
 
-        if($cabinet->userid != auth()->user()->userid)
+        if($cabinet->userid != auth()->user()->rentersid)
         {
             $userlog = user_login_log::query()->create([
-                'userid' => auth()->user()->userid,
+                'userid' => auth()->user()->rentersid,
                 'username' => auth()->user()->username,
                 'firstname' => auth()->user()->firstname,
                 'middlename' => auth()->user()->middlename,
@@ -315,10 +315,10 @@ class MyRequestController extends Controller
         if(auth()->user()->accesstype =='Renters'){
             $cabinet = cabinet::where('cabid',$cabid)
                     ->where(function(Builder $builder){
-                        $builder->where('userid', auth()->user()->userid);
+                        $builder->where('userid', auth()->user()->rentersid);
                     })->first();
         
-            $renter = Renters::where('userid',$cabinet->userid)->first();
+            $renter = Renter::where('rentersid',$cabinet->userid)->first();
 
             
 
@@ -334,7 +334,7 @@ class MyRequestController extends Controller
             if($totalsales == 0)
             {
                 $userlog = user_login_log::query()->create([
-                    'userid' => auth()->user()->userid,
+                    'userid' => auth()->user()->rentersid,
                     'username' => auth()->user()->username,
                     'firstname' => auth()->user()->firstname,
                     'middlename' => auth()->user()->middlename,
@@ -375,10 +375,10 @@ class MyRequestController extends Controller
         $startdate = Carbon::parse($request->startdate)->format('Y-m-d');
         $enddadte = Carbon::parse($request->enddate)->format('Y-m-d');
 
-        if($cabinet->userid != auth()->user()->userid)
+        if($cabinet->userid != auth()->user()->rentersid)
         {
             $userlog = user_login_log::query()->create([
-                'userid' => auth()->user()->userid,
+                'userid' => auth()->user()->rentersid,
                 'username' => auth()->user()->username,
                 'firstname' => auth()->user()->firstname,
                 'middlename' => auth()->user()->middlename,
@@ -401,10 +401,10 @@ class MyRequestController extends Controller
         if(auth()->user()->accesstype =='Renters'){
             $cabinet = cabinet::where('cabid',$cabid)
                     ->where(function(Builder $builder){
-                        $builder->where('userid', auth()->user()->userid);
+                        $builder->where('userid', auth()->user()->rentersid);
                     })->first();
         
-            $renter = Renters::where('userid',$cabinet->userid)->first();
+            $renter = Renter::where('rentersid',$cabinet->userid)->first();
 
             
 
@@ -421,7 +421,7 @@ class MyRequestController extends Controller
             if($totalsales == 0)
             {
                 $userlog = user_login_log::query()->create([
-                    'userid' => auth()->user()->userid,
+                    'userid' => auth()->user()->rentersid,
                     'username' => auth()->user()->username,
                     'firstname' => auth()->user()->firstname,
                     'middlename' => auth()->user()->middlename,
@@ -484,10 +484,10 @@ class MyRequestController extends Controller
         $cabinet = cabinet::where('cabid', $cabid)
                             ->latest()
                             ->first();
-        if($cabinet->userid != auth()->user()->userid)
+        if($cabinet->userid != auth()->user()->rentersid)
         {
             $userlog = user_login_log::query()->create([
-                'userid' => auth()->user()->userid,
+                'userid' => auth()->user()->rentersid,
                 'username' => auth()->user()->username,
                 'firstname' => auth()->user()->firstname,
                 'middlename' => auth()->user()->middlename,
@@ -525,7 +525,7 @@ class MyRequestController extends Controller
             if($totalsales == 0)
             {
                 $userlog = user_login_log::query()->create([
-                    'userid' => auth()->user()->userid,
+                    'userid' => auth()->user()->rentersid,
                     'username' => auth()->user()->username,
                     'firstname' => auth()->user()->firstname,
                     'middlename' => auth()->user()->middlename,

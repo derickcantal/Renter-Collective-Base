@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\cabinet;
 use App\Models\branch;
-use App\Models\Renters;
+use App\Models\Renter;
 use App\Models\history_sales;
 use App\Models\user_login_log;
 
@@ -40,7 +40,7 @@ class MyCabinetController extends Controller
     public function search(Request $request)
     {
 
-        $cabinets = cabinet::where('userid',auth()->user()->userid)
+        $cabinets = cabinet::where('userid',auth()->user()->rentersid)
                     ->orderBy('status','asc')
                     ->orderBy('cabid','asc')
                     ->orderBy('branchname','asc')
@@ -56,7 +56,7 @@ class MyCabinetController extends Controller
                             ->latest()
                             ->first();
 
-        if($cabinet->userid != auth()->user()->userid)
+        if($cabinet->userid != auth()->user()->rentersid)
         {
             return redirect()->route('dashboard.index')
                                 ->with('failed','Unknown Command.');
@@ -138,7 +138,7 @@ class MyCabinetController extends Controller
       
     }
     public function loaddata(){
-        $cabinets = cabinet::where('userid',auth()->user()->userid)
+        $cabinets = cabinet::where('userid',auth()->user()->rentersid)
                     ->orderBy('status','asc')
                     ->orderBy('cabid','asc')
                     ->orderBy('branchname','asc')
@@ -166,7 +166,7 @@ class MyCabinetController extends Controller
         // dd($today->month == $cabinet->rpmonth,$today->year == $cabinet->rpyear);
 
 
-        if($cabinet->userid != auth()->user()->userid)
+        if($cabinet->userid != auth()->user()->rentersid)
         {
             $notes = 'My Cabinet. Accessing not own account cabinet';
             $status = 'Failed';
