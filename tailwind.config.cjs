@@ -16,14 +16,10 @@ module.exports = {
      "./src/**/*.{html,js}"
   ],
   theme: {
-    extend: {
-      fontFamily: {
-        
-    },
+    extend: {},
   },
   plugins: [
       require('flowbite/plugin'),
       require('@tailwindcss/forms'),
     ],
-  }
 }

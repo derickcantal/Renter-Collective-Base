@@ -14,7 +14,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     Route::get('/dashboard', [DashboardController::class, 'displayall'])->name('dashboard.index');
-
+    Route::get('/login', [DashboardController::class, 'login'])->name('dashboard.login');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

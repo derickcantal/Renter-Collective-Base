@@ -12,8 +12,7 @@
 
         <!-- Styles / Scripts -->
         <script src={{ asset("build/assets/flowbite/dist/flowbite.min.js") }}"></script>
-        <link rel="stylesheet" href="{{ asset("build/assets/app-BI2-xRek.css") }}" type='text/css'>
-        <script src="{{ asset("build/assets/app-CDpJ3acP.js") }}"></script>
+        @include('layouts.scripts') 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         
         

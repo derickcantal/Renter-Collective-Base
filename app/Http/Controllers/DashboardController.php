@@ -6,6 +6,7 @@ use App\Models\Sales;
 use App\Models\RentalPayments;
 use App\Models\RenterRequests;
 use App\Models\user_login_log;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use \Carbon\Carbon;
@@ -60,9 +61,11 @@ class DashboardController extends Controller
         return redirect()->route('mydashboard.index');
 
     }
-
+    public function login(){
+        return view('auth.login');
+    }
   
-    public function displayall()
+    public function displayall(Request $request)
     {
        
         if(auth()->user()->status =='Active'){
@@ -76,7 +79,10 @@ class DashboardController extends Controller
                 return $this->administrator();
             }
         }else{
-            return view('login')->with('failed','Account Inactive');
+            Auth::guard('web')->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            return redirect()->back()->with('failed','Account Inactive');
         }
         
     }
