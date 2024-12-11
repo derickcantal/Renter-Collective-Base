@@ -6,6 +6,8 @@ use App\Http\Controllers\MyCabinetController;
 use App\Http\Controllers\MyRentalController;
 use App\Http\Controllers\MyRequestController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\ReportRentalController;
+use App\Http\Controllers\ReportRequestController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -50,10 +52,13 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/reports', [ReportsController::class, 'displayall'])->name('reports.index');
+    Route::get('/reports/sales', [ReportsController::class, 'displayall'])->name('reports.index');
     Route::get('reports/search', [ReportsController::class, 'searchhsales'])->name('reports.search');
     Route::get('/top/salesbranch', [ReportsController::class, 'topsalesbranch'])->name('reports.topsalesbranch');
     Route::get('/top/search/salesbranch', [ReportsController::class, 'searchtopsalesbranch'])->name('reports.searchtopsalesbranch');
+
+    Route::get('/reports/rental/payments', [ReportRentalController::class, 'index'])->name('reportrental.index');
+    Route::get('/reports/request/payments', [ReportRequestController::class, 'index'])->name('reportrequest.index');
 });
 
 require __DIR__.'/auth.php';
