@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\MyAccount;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\RenterRequests;
 use App\Models\Sales;
@@ -45,7 +46,7 @@ class MyRequestController extends Controller
                     ->orderBy('branchname','asc')
                     ->paginate($request->pagerow);
 
-            return view('myrequest.index',['cabinets' => $cabinets])
+            return view('myaccount.myrequest.index',['cabinets' => $cabinets])
                     ->with('i', (request()->input('page', 1) - 1) * $request->pagerow);   
         }else{
             return redirect()->route('dashboard.index');
@@ -63,7 +64,7 @@ class MyRequestController extends Controller
                     ->orderBy('branchname','asc')
                     ->paginate(5);
 
-            return view('myrequest.index',['cabinets' => $cabinets])
+            return view('myaccount.myrequest.index',['cabinets' => $cabinets])
                         ->with('i', (request()->input('page', 1) - 1) * 5);
 
             $RenterRequests = RenterRequests::where('cabinetname',auth()->user()->cabinetname)
@@ -90,7 +91,7 @@ class MyRequestController extends Controller
                 'status'  => 'Success',
             ]);  
                         
-            return view('myrequest.index',compact('RenterRequests'))
+            return view('myaccount.myrequest.index',compact('RenterRequests'))
                 ->with('i', (request()->input('page', 1) - 1) * 5);
         }else{
             return redirect()->route('dashboard.index');
@@ -119,7 +120,7 @@ class MyRequestController extends Controller
                                     ->with('failed','No Records Found.');
             }
 
-            return view('myrequest.sales',compact('history_sales'))
+            return view('myaccount.myrequest.sales',compact('history_sales'))
                     ->with('cabid',$cabid)
                     ->with('i', (request()->input('page', 1) - 1) * 5);
         }else{
@@ -442,7 +443,7 @@ class MyRequestController extends Controller
                             ->with('failed','No Sales Found.');
             }
             
-            return view('myrequest.create')
+            return view('myaccount.myrequest.create')
                         ->with(['cabinet'=>$cabinet])
                         ->with(['renter'=>$renter])
                         ->with(['history_sales'=>$history_sales])
@@ -545,7 +546,7 @@ class MyRequestController extends Controller
                                     ->with('failed','No Sales to collect.');
             }
 
-            return view('myrequest.show')
+            return view('myaccount.myrequest.show')
                         ->with('history_sales',$history_sales)
                         ->with('totalsales',$totalsales)
                         ->with('cabid',$cabid)
@@ -563,7 +564,7 @@ class MyRequestController extends Controller
     {
         if(auth()->user()->accesstype =='Renters'){
             $RenterRequests = RenterRequests::findOrFail($id);
-            return view('myrequest.edit',['RenterRequests' => $RenterRequests]);
+            return view('myaccount.myrequest.edit',['RenterRequests' => $RenterRequests]);
         }else{
             return redirect()->route('dashboard.index');
         }

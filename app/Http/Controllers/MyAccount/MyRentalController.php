@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\MyAccount;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\RentalPayments;
 use App\Models\cabinet;
@@ -45,7 +46,7 @@ class MyRentalController extends Controller
                     ->orderBy('cabid',$request->orderrow)
                     ->paginate($request->pagerow);
 
-            return view('myrental.index',['cabinets' => $cabinets])
+            return view('myaccount.myrental.index',['cabinets' => $cabinets])
                         ->with('i', (request()->input('page', 1) - 1) * $request->pagerow);
         }else{
             return redirect()->route('dashboard.index');
@@ -60,7 +61,7 @@ class MyRentalController extends Controller
                     ->orderBy('branchname','asc')
                     ->paginate(5);
 
-        return view('myrental.index',['cabinets' => $cabinets])
+        return view('myaccount.myrental.index',['cabinets' => $cabinets])
                     ->with('i', (request()->input('page', 1) - 1) * 5);
         
         $RentalPayments = RentalPayments::where('userid',auth()->user()->rentersid)
@@ -78,12 +79,12 @@ class MyRentalController extends Controller
 
         if(!empty($RentalPayments))
         {
-            return view('myrental.index',['RentalPayments' => $RentalPayments])
+            return view('myaccount.myrental.index',['RentalPayments' => $RentalPayments])
                 ->with('i', (request()->input('page', 1) - 1) * 5);
         }
         elseif(!empty($RentalPaymentsHistory))
         {
-            return view('myrental.index',['RentalPayments' => $RentalPaymentsHistory])
+            return view('myaccount.myrental.index',['RentalPayments' => $RentalPaymentsHistory])
                 ->with('i', (request()->input('page', 1) - 1) * 5);
         }
         else
@@ -119,7 +120,7 @@ class MyRentalController extends Controller
 
             if(!empty($RentalPaymentsHistory))
             {
-                return view('myrental.index',['RentalPayments' => $RentalPaymentsHistory])
+                return view('myaccount.myrental.index',['RentalPayments' => $RentalPaymentsHistory])
                     ->with('i', (request()->input('page', 1) - 1) * 5);
             }
             else
@@ -161,7 +162,7 @@ class MyRentalController extends Controller
     public function create()
     {
         if(auth()->user()->accesstype =='Renters'){
-            return view('myrental.create');
+            return view('myaccount.myrental.create');
         }else{
             return redirect()->route('dashboard.index');
         }
@@ -192,7 +193,7 @@ class MyRentalController extends Controller
                                         ->latest()->get();
         $recordcount = collect($RentalPayments1)->count('rpid');
 
-        return view('myrental.show',['rentalpayments' => $RentalPayments])
+        return view('myaccount.myrental.show',['rentalpayments' => $RentalPayments])
                 ->with(['cabid'=>$cabinet->cabid])
                 ->with(['branchname'=>$cabinet->branchname])
                 ->with(['cabinetname'=>$cabinet->cabinetname])
@@ -226,7 +227,7 @@ class MyRentalController extends Controller
                 $status = 'Success';
                 $this->userlog($notes,$status);
 
-            return view('myrental.show',['rentalpayments' => $RentalPayments])
+            return view('myaccount.myrental.show',['rentalpayments' => $RentalPayments])
                 ->with(['cabid'=>$cabinet->cabid])
                 ->with(['branchname'=>$cabinet->branchname])
                 ->with(['cabinetname'=>$cabinet->cabinetname])
@@ -246,7 +247,7 @@ class MyRentalController extends Controller
                                         ->latest()->get();
         $recordcount = collect($RentalPaymentsHistory1)->count('rpid');
 
-        return view('myrental.show-history',['rentalpayments' => $RentalPaymentsHistory])
+        return view('myaccount.myrental.show-history',['rentalpayments' => $RentalPaymentsHistory])
                     ->with(['cabinetname'=>$cabinet->cabinetname])
                     ->with(['branchname'=>$cabinet->branchname])
                     ->with(['cabid'=>$cabinet->cabid])
@@ -278,7 +279,7 @@ class MyRentalController extends Controller
                 $status = 'Success';
                 $this->userlog($notes,$status);
 
-                return view('myrental.show-history',['rentalpayments' => $RentalPaymentsHistory])
+                return view('myaccount.myrental.show-history',['rentalpayments' => $RentalPaymentsHistory])
                     ->with(['cabinetname'=>$cabinet->cabinetname])
                     ->with(['branchname'=>$cabinet->branchname])
                     ->with(['cabid'=>$cabinet->cabid])

@@ -1,16 +1,25 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            <u><a href="{{ route('mycabinet.index') }}" class="inline-flex items-center text-lg font-high text-white-700 hover:text-blue-600 dark:text-white dark:hover:text-gray-400"> Cabinet</a></u> |
-            <a href="{{ route('myrental.index') }}" class="inline-flex items-center text-lg font-high text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"> Rental</a> | 
-            <a href="{{ route('myrequest.index') }}" class="inline-flex items-center text-lg font-high text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">Request</a>  
-        </h2>
-    </x-slot>
+    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            @include('layouts.myaccount.navigation')
+        </div>
+    </div>
+    <div class="py-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            
+        </div>
+    </div>
+</x-app-layout>
+
+<x-app-layout>fhffhtl
+    addy
+
     <section>
         <div class="py-8">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="py-8">
+                        
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                             <!-- Breadcrumb -->
                             <nav class="flex px-5 py-3 text-gray-700  bg-gray-50 dark:bg-gray-800 dark:border-gray-700" aria-label="Breadcrumb">

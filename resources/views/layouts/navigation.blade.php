@@ -16,21 +16,10 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
-                @if(auth()->user()->accesstype == 'Administrator' or auth()->user()->accesstype == 'Supervisor')
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
-                        {{ __('Users') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('renters.index')" :active="request()->routeIs('renters.index')">
-                        {{ __('Renters') }}
-                    </x-nav-link>
-                </div>
-                @endif
+                
                 @if(auth()->user()->accesstype == 'Renters')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('mycabinet.index')" :active="request()->routeIs('mycabinet.index')">
+                    <x-nav-link :href="route('myaccount.index')" :active="request()->routeIs('mycabinet.index')">
                         {{ __('My Account') }}
                     </x-nav-link>
                 </div>

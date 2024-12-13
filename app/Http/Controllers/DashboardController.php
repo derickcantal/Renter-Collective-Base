@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sales;
-use App\Models\RentalPayments;
+use App\Models\RentalPayments; 
 use App\Models\RenterRequests;
 use App\Models\user_login_log;
 use Illuminate\Http\Request;
@@ -36,29 +36,7 @@ class DashboardController extends Controller
     }
      public function renters(){
 
-        $sales = Sales::where('userid',auth()->user()->rentersid)
-                    ->where(function(Builder $builder){
-                        $builder->where('collected_status','Pending')
-                                ->where('total','!=',0);
-                    })->latest()->paginate(5);
-
-        $RenterRequests = RenterRequests::where('userid',auth()->user()->rentersid)
-                    ->where(function(Builder $builder){
-                        $builder
-                                ->orderBy('status','desc');
-                    })->latest()->paginate(5);
-
-        $rentalpayments = RentalPayments::where('userid',auth()->user()->rentersid)
-                    ->latest()
-                    ->paginate(5);
-
-
-        return view('dashboard.index')->with(['sales' => $sales])
-                                        ->with(['RenterRequests' => $RenterRequests])
-                                        ->with(['rentalpayments' => $rentalpayments])
-                                        ->with('i', (request()->input('page', 1) - 1) * 5);
-
-        return redirect()->route('mydashboard.index');
+        return view('dashboard.index');
 
     }
     public function login(){

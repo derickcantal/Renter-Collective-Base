@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\MyAccount;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\cabinet;
 use App\Models\branch;
@@ -46,7 +47,7 @@ class MyCabinetController extends Controller
                     ->orderBy('branchname','asc')
                     ->paginate($request->pagerow);
     
-        return view('mycabinet.index',compact('cabinets'))
+        return view('myaccount.mycabinet.index',compact('cabinets'))
             ->with('i', (request()->input('page', 1) - 1) * $request->pagerow);
     }
 
@@ -132,7 +133,7 @@ class MyCabinetController extends Controller
             
         }
         
-        return view('mycabinet.cabsales',compact('history_sales'))
+        return view('myaccount.mycabinet.cabsales',compact('history_sales'))
                                     ->with(['cabinetid' => $cabinetid])
                                     ->with('i', (request()->input('page', 1) - 1) * $request->pagerow);  
       
@@ -148,7 +149,7 @@ class MyCabinetController extends Controller
         $status = 'Success';
         $this->userlog($notes,$status);
 
-        return view('mycabinet.index',compact('cabinets'))
+        return view('myaccount.mycabinet.index',compact('cabinets'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -202,7 +203,7 @@ class MyCabinetController extends Controller
                                     })
                                     ->paginate(5);
 
-        return view('mycabinet.cabsales',compact('history_sales'))
+        return view('myaccount.mycabinet.cabsales',compact('history_sales'))
                             ->with(['cabinetid' => $cabinetid])
                             ->with('i', (request()->input('page', 1) - 1) * 5);                
 

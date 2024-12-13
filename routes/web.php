@@ -2,12 +2,18 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\MyCabinetController;
-use App\Http\Controllers\MyRentalController;
-use App\Http\Controllers\MyRequestController;
+use App\Http\Controllers\MyAccount\MyCabinetController;
+use App\Http\Controllers\MyAccount\MyRentalController;
+use App\Http\Controllers\MyAccount\MyRequestController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\ReportRentalController;
 use App\Http\Controllers\ReportRequestController;
+use App\Http\Controllers\Dashboard\OverviewController;
+use App\Http\Controllers\Dashboard\RentalController;
+use App\Http\Controllers\Dashboard\RequestsController;
+use App\Http\Controllers\Dashboard\SalesController;
+use App\Http\Controllers\Profile\AvatarController;
+use App\Http\Controllers\MyAccount\MyAccountController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,6 +27,10 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'displayall'])->name('dashboard.index');
+    Route::get('/dashboard/Overview', [OverviewController::class, 'index'])->name('dashboard.overview.index');
+    Route::get('/dashboard/Rental', [RentalController::class, 'index'])->name('dashboard.rental.index');
+    Route::get('/dashboard/Requests', [RequestsController::class, 'index'])->name('dashboard.requests.index');
+    Route::get('/dashboard/Sales', [SalesController::class, 'index'])->name('dashboard.sales.index');
 });
 
 Route::middleware('auth')->group(function () {
@@ -30,6 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::middleware('auth')->group(function () {
+
+    Route::get('myaccount', [MyAccountController::class, 'index'])->name('myaccount.index');
 
     Route::get('mycabinet/search', [MyCabinetController::class, 'search'])->name('mycabinet.search');
     Route::get('mycabinet/sales/{cabinetsales}', [MyCabinetController::class, 'cabinetsales'])->name('mycabinet.sales');
