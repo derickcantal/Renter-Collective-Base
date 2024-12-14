@@ -12,14 +12,14 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard.index')">
+                    <x-nav-link :href="route('dashboard.overview.index')" :active="request()->routeIs('dashboard.overview.index')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
                 
                 @if(auth()->user()->accesstype == 'Renters')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('myaccount.index')" :active="request()->routeIs('mycabinet.index')">
+                    <x-nav-link :href="route('mycabinet.index')" :active="request()->routeIs('mycabinet.index')">
                         {{ __('My Account') }}
                     </x-nav-link>
                 </div>

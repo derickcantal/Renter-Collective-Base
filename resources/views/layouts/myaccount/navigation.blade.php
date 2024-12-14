@@ -4,10 +4,10 @@
             {{ __('Cabinet') }}
         </x-nav-link>
         <x-nav-link :href="route('myrequest.index')" :active="request()->routeIs('myrequest.index')">
-            {{ __('Rental') }}
+            {{ __('Request') }}
         </x-nav-link>
         <x-nav-link :href="route('myrental.index')" :active="request()->routeIs('myrental.index')">
-            {{ __('Request') }}
+            {{ __('Rental') }}
         </x-nav-link>
     </ul>
 </div>

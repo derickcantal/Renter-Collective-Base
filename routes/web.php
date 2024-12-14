@@ -6,14 +6,16 @@ use App\Http\Controllers\MyAccount\MyCabinetController;
 use App\Http\Controllers\MyAccount\MyRentalController;
 use App\Http\Controllers\MyAccount\MyRequestController;
 use App\Http\Controllers\ReportsController;
-use App\Http\Controllers\ReportRentalController;
-use App\Http\Controllers\ReportRequestController;
+use App\Http\Controllers\Reports\ReportRentalController;
+use App\Http\Controllers\Reports\ReportRequestController;
+use App\Http\Controllers\Reports\ReportSalesController;
 use App\Http\Controllers\Dashboard\OverviewController;
 use App\Http\Controllers\Dashboard\RentalController;
 use App\Http\Controllers\Dashboard\RequestsController;
 use App\Http\Controllers\Dashboard\SalesController;
 use App\Http\Controllers\Profile\AvatarController;
 use App\Http\Controllers\MyAccount\MyAccountController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {

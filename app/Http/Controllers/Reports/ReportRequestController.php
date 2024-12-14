@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Reports;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\history_sales;
@@ -12,7 +13,7 @@ use \Carbon\Carbon;
 use App\Models\branch;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
-class ReportRentalController extends Controller
+class ReportRequestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,7 +37,7 @@ class ReportRentalController extends Controller
         
         $rentalpayments = history_rental_payments::latest()->paginate(5);
 
-        return view('reports.rentalpayments')->with(['sales' => $sales])
+        return view('reports.requests.index')->with(['sales' => $sales])
                 ->with(['sales_requests' => $sales_requests])
                 ->with(['branch' => $branch])
                 ->with(['rentalpayments' => $rentalpayments])

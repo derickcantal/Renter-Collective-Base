@@ -682,7 +682,7 @@ class ReportsController extends Controller
                 'notes' => 'Reports',
                 'status'  => 'Success',
             ]);
-            return view('reports.index')->with(['sales' => $sales])
+            return view('reports.sales.index')->with(['sales' => $sales])
                 ->with(['sales_requests' => $sales_requests])
                 ->with(['branch' => $branch])
                 ->with(['rentalpayments' => $rentalpayments])
