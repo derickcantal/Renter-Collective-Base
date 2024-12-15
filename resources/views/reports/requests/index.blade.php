@@ -27,6 +27,7 @@
                                 </nav>
                                 <!-- Searchbar -->
                                 <form class="flex items-center" action="{{ route('reportrequest.index') }}" method="get">
+                                    @csrf
                                     <div class="flex flex-col items-center justify-between p-4 space-y-3 md:flex-row md:space-y-0 md:space-x-2">
                                         <div class="grid gap-4 mb-2 grid-cols-2 px-2"> 
                                             <div>

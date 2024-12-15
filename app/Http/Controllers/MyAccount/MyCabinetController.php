@@ -164,6 +164,11 @@ class MyCabinetController extends Controller
                             ->latest()
                             ->first();
 
+                            $cabinetid = $cabinetsales;
+
+
+
+
         // dd($today->month == $cabinet->rpmonth,$today->year == $cabinet->rpyear);
 
 

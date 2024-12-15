@@ -32,7 +32,7 @@
                 </div>
                 @endif
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('reports.index')" :active="request()->routeIs('reports.index')">
+                    <x-nav-link :href="route('reportsales.index')" :active="request()->routeIs('reportsales.index')">
                         {{ __('Reports') }}
                     </x-nav-link>
                 </div>
@@ -75,7 +75,7 @@
                             {{ __('Cashier') }}
                         </x-dropdown-link>
                         @endif
-                        <x-dropdown-link :href="route('reports.index')" :active="request()->routeIs('reports.index')">
+                        <x-dropdown-link :href="route('reportsales.index')" :active="request()->routeIs('reportsales.index')">
                             {{ __('Reports') }}
                         </x-dropdown-link>
                         <div class="pt-1 pb-1 border-t border-gray-200 dark:border-gray-600">
@@ -152,7 +152,7 @@
         </div>
         @endif
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('reports.index')" :active="request()->routeIs('reports.index')">
+            <x-responsive-nav-link :href="route('reportsales.index')" :active="request()->routeIs('reportsales.index')">
                 {{ __('Reports') }}
             </x-responsive-nav-link>
         </div>

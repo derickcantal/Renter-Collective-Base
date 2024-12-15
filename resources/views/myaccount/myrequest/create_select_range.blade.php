@@ -1,23 +1,19 @@
   
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            <a href="{{ route('mycabinet.index') }}" class="inline-flex items-center text-lg font-high text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"> Cabinet</a> | 
-            <a href="{{ route('myrental.index') }}" class="inline-flex items-center text-lg font-high text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">Rental</a>  |
-            <u><a href="{{ route('myrequest.index') }}" class="inline-flex items-center text-lg font-high text-white-700 hover:text-blue-600 dark:text-white dark:hover:text-gray-400"> Request</a></u> 
-        </h2>
-    </x-slot>
-    <section>
-        <div class="py-8">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        
+    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            @include('layouts.myaccount.navigation')
+        </div>
+    </div>
+<div class="py-8">
+	<div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+		<div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+			<div class="py-8">
+				<div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+					<div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                         <form action="{{ route('myrequest.creates',$cabid) }}" method="POST" class="p-4 md:p-5">
-                        @csrf 
-                        @method('GET')
-
+                            @csrf 
+                            @method('GET')
                             <div class="relative p-4 w-full max-w-full max-h-full">
                                 <!-- Breadcrumb -->
                                 <nav class="flex px-5 py-3 text-gray-700  bg-gray-50 dark:bg-gray-800 dark:border-gray-700" aria-label="Breadcrumb">
@@ -114,5 +110,6 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</div>
 </x-app-layout>

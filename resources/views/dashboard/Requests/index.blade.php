@@ -6,9 +6,9 @@
     </div>
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div class="py-4 max-w-7xl mx-auto sm:px-6 lg:px-8">
                         <div class="p-6 text-gray-900 dark:text-gray-100">
                             {{ __("Requests") }}
                         </div>
@@ -53,7 +53,7 @@
                                         
                                         @forelse($RenterRequests as $RenterRequest) 
                                 <tbody>
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         
                                         <th class="px-6 py-4">
                                             <div class="text-base font-semibold"><x-input-label for="username" :value="$RenterRequest->username"/></div>
