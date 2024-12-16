@@ -5,7 +5,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MyAccount\MyCabinetController;
 use App\Http\Controllers\MyAccount\MyRentalController;
 use App\Http\Controllers\MyAccount\MyRequestController;
-use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\Reports\ReportRentalController;
 use App\Http\Controllers\Reports\ReportRequestController;
 use App\Http\Controllers\Reports\ReportSalesController;
@@ -67,15 +66,14 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/reports/rental/payments', [ReportRentalController::class, 'index'])->name('reportrental.index');
+    Route::get('/reports/rental/payments/search', [ReportRentalController::class, 'search'])->name('reportrental.search');
+
     Route::get('/reports/request/payments', [ReportRequestController::class, 'index'])->name('reportrequest.index');
+    Route::get('/reports/request/payments/search', [ReportRequestController::class, 'search'])->name('reportrequest.search');
     
     Route::get('/reports/sales', [ReportSalesController::class, 'index'])->name('reportsales.index');
-    Route::get('/reports/sales/search', [ReportSalesController::class, 'searchsales'])->name('reportsales.search');
+    Route::get('/reports/sales/search', [ReportSalesController::class, 'search'])->name('reportsales.search');
 
-   // Route::get('/reports/sales', [ReportsController::class, 'displayall'])->name('reports.index');
-   // Route::get('reports/search', [ReportsController::class, 'searchhsales'])->name('reports.search');
-   // Route::get('/top/salesbranch', [ReportsController::class, 'topsalesbranch'])->name('reports.topsalesbranch');
-   // Route::get('/top/search/salesbranch', [ReportsController::class, 'searchtopsalesbranch'])->name('reports.searchtopsalesbranch');
 });
 
 require __DIR__.'/auth.php';

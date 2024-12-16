@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\history_sales;
 use App\Models\user_login_log;
 use \Carbon\Carbon;
-use App\Models\branch;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class ReportSalesController extends Controller
@@ -34,7 +33,7 @@ class ReportSalesController extends Controller
         ]);
     }
 
-    public function searchsales(Request $request){
+    public function search(Request $request){
         if($request->orderrow == 'H-L'){
             $orderby = "total";
             $orderrow = 'desc';
@@ -67,12 +66,9 @@ class ReportSalesController extends Controller
                 $totalqty = collect($salesget)->sum('qty');
                 $totalsales = collect($salesget)->sum('total');
 
-                $branch = branch::orderBy('branchname', 'asc')->get();
-    
                 return view('reports.sales.index')->with(['sales' => $sales])
                     ->with(['totalsales' => $totalsales])
-                    ->with(['totalqty' => $totalqty])
-                    ->with(['branch' => $branch]);
+                    ->with(['totalqty' => $totalqty]);
             }
             elseif(empty($request->startdate) or empty($request->enddate)){
                 
@@ -96,13 +92,10 @@ class ReportSalesController extends Controller
                 $totalqty = collect($salesget)->sum('qty');
                 $totalsales = collect($salesget)->sum('total');
     
-                $branch = branch::orderBy('branchname', 'asc')->get();
-
                 return view('reports.sales.index')
                     ->with(['sales' => $sales])
                     ->with(['totalsales' => $totalsales])
-                    ->with(['totalqty' => $totalqty])
-                    ->with(['branch' => $branch]);
+                    ->with(['totalqty' => $totalqty]);
                 
             }
         }else{
