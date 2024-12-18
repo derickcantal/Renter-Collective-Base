@@ -57,9 +57,11 @@ class ReportSalesController extends Controller
         if(empty($request->search)){
             if(empty($request->startdate) && empty($request->enddate)){
                 $salesget = history_sales::where('userid',auth()->user()->rentersid)
+                                        ->where('total', '!=', '0')
                                         ->orderBy($orderby,$orderrow)
                                         ->get();
                 $sales = history_sales::where('userid',auth()->user()->rentersid)
+                                        ->where('total', '!=', '0')
                                         ->orderBy($orderby,$orderrow)
                                         ->paginate($request->pagerow);
 
@@ -81,10 +83,12 @@ class ReportSalesController extends Controller
                 $endDate = Carbon::parse($request->enddate)->format('Y-m-d');
 
                 $salesget = history_sales::where('userid',auth()->user()->rentersid)
+                                            ->where('total', '!=', '0')
                                             ->whereBetween('timerecorded', [$startDate .' 00:00:00', $endDate .' 23:59:59'])
                                             ->orderBy($orderby,$orderrow)
                                             ->get();
                 $sales = history_sales::where('userid',auth()->user()->rentersid)
+                                        ->where('total', '!=', '0')
                                         ->whereBetween('timerecorded', [$startDate .' 00:00:00', $endDate .' 23:59:59'])
                                         ->orderBy($orderby,$orderrow)
                                         ->paginate($request->pagerow);

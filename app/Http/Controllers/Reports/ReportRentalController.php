@@ -16,23 +16,11 @@ class ReportRentalController extends Controller
 {
     public function search(Request $request)
     {
-        if($request->orderrow == 'H-L'){
-            $orderby = "total";
-            $orderrow = 'desc';
-        }elseif($request->orderrow == 'L-H'){
-            $orderby = "total";
-            $orderrow = 'asc';
-        }elseif($request->orderrow == 'A-Z'){
-            $orderby = "productname";
-            $orderrow = 'asc';
-        }elseif($request->orderrow == 'Z-A'){
-            $orderby = "productname";
-            $orderrow = 'desc';
-        }elseif($request->orderrow == 'Latest'){
-            $orderby = "salesid";
+        if($request->orderrow == 'Latest'){
+            $orderby = "rpid";
             $orderrow = 'desc';
         }elseif($request->orderrow == 'Oldest'){
-            $orderby = "salesid";
+            $orderby = "rpid";
             $orderrow = 'asc';
         }
 
@@ -117,11 +105,6 @@ class ReportRentalController extends Controller
 
             $totalsales = collect($rentalpaymentsget)->sum('total');
             $totalqty = collect($rentalpaymentsget)->sum('qty');
-
-            $sales_requests = history_sales_requests::where('userid',auth()->user()->rentersid)->orderBy('status','desc')->paginate(5);
-        
-            $rentalpayments = history_rental_payments::where('userid',auth()->user()->rentersid)->orderBy('status','desc')->paginate(5);
-
 
             return view('reports.rental.index')
                 ->with(['rentalpayments' => $rentalpayments])
