@@ -3,11 +3,11 @@
         <x-nav-link :href="route('mycabinet.index')" :active="request()->routeIs('mycabinet.index')">
             {{ __('Cabinet') }}
         </x-nav-link>
-        <x-nav-link :href="route('myrequest.index')" :active="request()->routeIs('myrequest.index')">
+        <!-- <x-nav-link :href="route('myrequest.index')" :active="request()->routeIs('myrequest.index')">
             {{ __('Request') }}
         </x-nav-link>
         <x-nav-link :href="route('myrental.index')" :active="request()->routeIs('myrental.index')">
             {{ __('Rental') }}
-        </x-nav-link>
+        </x-nav-link> -->
     </ul>
 </div>
