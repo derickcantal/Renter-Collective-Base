@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\RentalPayments;
 use Illuminate\Http\Request;
+use App\Models\Sales;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use \Carbon\Carbon;
 
 class OverviewController extends Controller
 {
@@ -34,6 +37,13 @@ class OverviewController extends Controller
      */
     public function index()
     {
+        $sales = Sales::where('userid',auth()->user()->rentersid)
+                    ->where(function(Builder $builder){
+                        $builder->where('collected_status','Pending')
+                                ->where('total','!=',0);
+                    })->get();
+        dd($sales);
+
         $rentalpayments = RentalPayments::where('userid',auth()->user()->rentersid)
         ->latest()
         ->paginate(5);
