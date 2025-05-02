@@ -31,29 +31,138 @@
                                             <x-input-label>Today Sales</x-input-label>
                                         </th>
                                         <td class="px-6 py-4">
-                                            <x-input-label></x-input-label>
+                                            <x-input-label>{{ number_format($totalsales, 2); }}</x-input-label>
                                         </td>
                                     </tr>
                                     <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <th class="px-6 py-4">
-                                            <x-input-label>Requests</x-input-label>
+                                            <x-input-label>Last 7 Days Total</x-input-label>
                                         </th>
                                         <td class="px-6 py-4">
-                                            <x-input-label></x-input-label>
+                                            <x-input-label>{{ number_format(0, 2); }}</x-input-label>
                                         </td>
                                     </tr>
-                                    <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                        <th class="px-6 py-4">
-                                            <x-input-label>Rentals</x-input-label>
-                                        </th>
-                                        <td class="px-6 py-4">
-                                            <x-input-label></x-input-label>
-                                        </td>
-                                    </tr>
+                 
                                     
                                 </tbody>
                             </table>
                           
+                        </div>
+                        <div class="py-4">
+                            <div class="max-w-7xl overflow-x-auto shadow-md sm:rounded-lg" >
+                                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-3">
+                                                MONTHLY SALES
+                                            </th>
+                                            <th scope="col" class="px-6 py-3">
+                                                TOTAL
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th class="px-6 py-4">
+                                                <x-input-label>JANUARY</x-input-label>
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                <x-input-label>{{ number_format(0, 2); }}</x-input-label>
+                                            </td>
+                                        </tr>
+                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th class="px-6 py-4">
+                                                <x-input-label>FEBRUARY</x-input-label>
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                <x-input-label>{{ number_format(0, 2); }}</x-input-label>
+                                            </td>
+                                        </tr>
+                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th class="px-6 py-4">
+                                                <x-input-label>MARCH</x-input-label>
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                <x-input-label>{{ number_format(0, 2); }}</x-input-label>
+                                            </td>
+                                        </tr>
+                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th class="px-6 py-4">
+                                                <x-input-label>APRIL</x-input-label>
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                <x-input-label>{{ number_format(0, 2); }}</x-input-label>
+                                            </td>
+                                        </tr>
+                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th class="px-6 py-4">
+                                                <x-input-label>MAY</x-input-label>
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                <x-input-label>{{ number_format(0, 2); }}</x-input-label>
+                                            </td>
+                                        </tr>
+                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th class="px-6 py-4">
+                                                <x-input-label>JUNE</x-input-label>
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                <x-input-label>{{ number_format(0, 2); }}</x-input-label>
+                                            </td>
+                                        </tr>
+                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th class="px-6 py-4">
+                                                <x-input-label>JULY</x-input-label>
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                <x-input-label>{{ number_format(0, 2); }}</x-input-label>
+                                            </td>
+                                        </tr>
+                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th class="px-6 py-4">
+                                                <x-input-label>AUGUST</x-input-label>
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                <x-input-label>{{ number_format(0, 2); }}</x-input-label>
+                                            </td>
+                                        </tr>
+                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th class="px-6 py-4">
+                                                <x-input-label>SEPTEMBER</x-input-label>
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                <x-input-label>{{ number_format(0, 2); }}</x-input-label>
+                                            </td>
+                                        </tr>
+                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th class="px-6 py-4">
+                                                <x-input-label>OCTOBER</x-input-label>
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                <x-input-label>{{ number_format(0, 2); }}</x-input-label>
+                                            </td>
+                                        </tr>
+                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th class="px-6 py-4">
+                                                <x-input-label>NOVEMBER</x-input-label>
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                <x-input-label>{{ number_format(0, 2); }}</x-input-label>
+                                            </td>
+                                        </tr>
+                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th class="px-6 py-4">
+                                                <x-input-label>DECEMBER</x-input-label>
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                <x-input-label>{{ number_format(0, 2); }}</x-input-label>
+                                            </td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            
+                            </div>
                         </div>
                     </div>
                 </div>

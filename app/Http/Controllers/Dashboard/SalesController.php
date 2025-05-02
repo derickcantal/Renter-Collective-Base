@@ -21,7 +21,7 @@ class SalesController extends Controller
                     ->where(function(Builder $builder){
                         $builder->where('collected_status','Pending')
                                 ->where('total','!=',0);
-                    })->latest()->paginate(5);.
+                    })->latest()->paginate(5);
         
         return view('dashboard.Sales.index')
                             ->with(['sales' => $sales])

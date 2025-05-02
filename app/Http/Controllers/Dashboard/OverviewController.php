@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\RentalPayments;
-use Illuminate\Http\Request;
 use App\Models\Sales;
+use Illuminate\Http\Request;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use \Carbon\Carbon;
+
 
 class OverviewController extends Controller
 {
@@ -42,7 +43,8 @@ class OverviewController extends Controller
                         $builder->where('collected_status','Pending')
                                 ->where('total','!=',0);
                     })->get();
-        dd($sales);
+
+        $totalsales = collect($sales)->sum('total');
 
         $rentalpayments = RentalPayments::where('userid',auth()->user()->rentersid)
         ->latest()
@@ -51,6 +53,7 @@ class OverviewController extends Controller
 
         return view('dashboard.Overview.index')
                             ->with(['rentalpayments' => $rentalpayments])
+                            ->with(['totalsales' => $totalsales])
                             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 

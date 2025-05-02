@@ -9,7 +9,7 @@
         <x-nav-link :href="route('reportrental.index')" :active="request()->routeIs('reportrental.index')">
             {{ __('Rental Payments') }}
         </x-nav-link> -->
-        <x-nav-link :href="#" :active="request()->routeIs('#">
+        <x-nav-link href="#">
             {{ __('Weekly Sales Report') }}
         </x-nav-link>
     </ul>
