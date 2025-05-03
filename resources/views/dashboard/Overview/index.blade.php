@@ -61,103 +61,22 @@
                                             </th>
                                         </tr>
                                     </thead>
+                                   
                                     <tbody>
+                                        @forelse($renter_monthly_sale as $renter_monthly_sales) 
                                         <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <th class="px-6 py-4">
-                                                <x-input-label>JANUARY</x-input-label>
+                                                <x-input-label>{{ $renter_monthly_sales->rpmonth }} - {{ $renter_monthly_sales->rpyear }}</x-input-label>
                                             </th>
                                             <td class="px-6 py-4">
-                                                <x-input-label>{{ number_format(0, 2); }}</x-input-label>
+                                                <x-input-label>{{ number_format($renter_monthly_sales->totalsales, 2); }}</x-input-label>
                                             </td>
                                         </tr>
-                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                            <th class="px-6 py-4">
-                                                <x-input-label>FEBRUARY</x-input-label>
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                <x-input-label>{{ number_format(0, 2); }}</x-input-label>
-                                            </td>
-                                        </tr>
-                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                            <th class="px-6 py-4">
-                                                <x-input-label>MARCH</x-input-label>
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                <x-input-label>{{ number_format(0, 2); }}</x-input-label>
-                                            </td>
-                                        </tr>
-                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                            <th class="px-6 py-4">
-                                                <x-input-label>APRIL</x-input-label>
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                <x-input-label>{{ number_format(0, 2); }}</x-input-label>
-                                            </td>
-                                        </tr>
-                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                            <th class="px-6 py-4">
-                                                <x-input-label>MAY</x-input-label>
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                <x-input-label>{{ number_format(0, 2); }}</x-input-label>
-                                            </td>
-                                        </tr>
-                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                            <th class="px-6 py-4">
-                                                <x-input-label>JUNE</x-input-label>
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                <x-input-label>{{ number_format(0, 2); }}</x-input-label>
-                                            </td>
-                                        </tr>
-                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                            <th class="px-6 py-4">
-                                                <x-input-label>JULY</x-input-label>
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                <x-input-label>{{ number_format(0, 2); }}</x-input-label>
-                                            </td>
-                                        </tr>
-                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                            <th class="px-6 py-4">
-                                                <x-input-label>AUGUST</x-input-label>
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                <x-input-label>{{ number_format(0, 2); }}</x-input-label>
-                                            </td>
-                                        </tr>
-                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                            <th class="px-6 py-4">
-                                                <x-input-label>SEPTEMBER</x-input-label>
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                <x-input-label>{{ number_format(0, 2); }}</x-input-label>
-                                            </td>
-                                        </tr>
-                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                            <th class="px-6 py-4">
-                                                <x-input-label>OCTOBER</x-input-label>
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                <x-input-label>{{ number_format(0, 2); }}</x-input-label>
-                                            </td>
-                                        </tr>
-                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                            <th class="px-6 py-4">
-                                                <x-input-label>NOVEMBER</x-input-label>
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                <x-input-label>{{ number_format(0, 2); }}</x-input-label>
-                                            </td>
-                                        </tr>
-                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                            <th class="px-6 py-4">
-                                                <x-input-label>DECEMBER</x-input-label>
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                <x-input-label>{{ number_format(0, 2); }}</x-input-label>
-                                            </td>
-                                        </tr>
+                                        @empty
+                                        <td scope="row" class="px-6 py-4">
+                                            No Records Found.
+                                        </td>	
+                                        @endforelse
                                         
                                     </tbody>
                                 </table>
