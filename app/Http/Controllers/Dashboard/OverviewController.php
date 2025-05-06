@@ -67,16 +67,23 @@ class OverviewController extends Controller
             $rpmonth = $rms->rpmonth;
             $rpyear = $rms->rpyear;
         }
-
+        $jan =  history_sales::where('userid',auth()->user()->rentersid)
+        ->where(function(Builder $builder) {  
+            $builder->whereYear('created_at', 2025)
+                    ->whereMonth('created_at', 1);
+        })->get();
+        $jansales = collect($jan)->sum('total');
+        dd($jansales);
         $history_sales = history_sales::where('userid',auth()->user()->rentersid)
-                                            ->where(function(Builder $builder) use($tmonth, $tyear){            
-                                                $builder->whereYear('created_at1', $tmonth)
-                                                        ->whereMonth('created_at', $tyear)
-                                                        ->where('collected_status','Pending')
-                                                        ->sum('total');
+                                            ->where(function(Builder $builder) {            
+                                                $builder->whereBetween('created_at', [Carbon::now()->startOfYear(), Carbon::now()->endOfYear()])
+                                                        ->where('collected_status','Pending');
                                                 })->get();
-           dd($history_sales);
 
+        $test = history_sales::whereBetween('created_at', [Carbon::now()->startOfYear(), Carbon::now()->endOfYear()])->get();
+           
+           $testtotal = collect($history_sales)->sum('total');
+           dd($testtotal);
         if(empty($renter_monthly_sales)){
 
         }elseif($today->month == $rpmonth && $today->year == $rpyear){
