@@ -63,20 +63,126 @@
                                     </thead>
                                    
                                     <tbody>
-                                        @forelse($renter_monthly_sale as $renter_monthly_sales) 
+                                        <!-- January -->
                                         <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <th class="px-6 py-4">
-                                                <x-input-label>{{ $renter_monthly_sales->rpmonth }} - {{ $renter_monthly_sales->rpyear }}</x-input-label>
+                                                <x-input-label>January - {{ $tyear }}</x-input-label>
                                             </th>
                                             <td class="px-6 py-4">
-                                                <x-input-label>{{ number_format($renter_monthly_sales->totalsales, 2); }}</x-input-label>
+                                                <x-input-label>{{ number_format($jansales, 2); }}</x-input-label>
                                             </td>
                                         </tr>
-                                        @empty
-                                        <td scope="row" class="px-6 py-4">
-                                            No Records Found.
-                                        </td>	
-                                        @endforelse
+
+                                        <!-- February -->
+                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th class="px-6 py-4">
+                                                <x-input-label>February - {{ $tyear }}</x-input-label>
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                <x-input-label>{{ number_format($febsales, 2); }}</x-input-label>
+                                            </td>
+                                        </tr>
+
+                                        <!-- March -->
+                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th class="px-6 py-4">
+                                                <x-input-label>March - {{ $tyear }}</x-input-label>
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                <x-input-label>{{ number_format($marsales, 2); }}</x-input-label>
+                                            </td>
+                                        </tr>
+
+                                        <!-- April -->
+                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th class="px-6 py-4">
+                                                <x-input-label>April - {{ $tyear }}</x-input-label>
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                <x-input-label>{{ number_format($aprsales, 2); }}</x-input-label>
+                                            </td>
+                                        </tr>
+
+                                        <!-- May -->
+                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th class="px-6 py-4">
+                                                <x-input-label>May - {{ $tyear }}</x-input-label>
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                <x-input-label>{{ number_format($maysales, 2); }}</x-input-label>
+                                            </td>
+                                        </tr>
+
+                                        <!-- June -->
+                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th class="px-6 py-4">
+                                                <x-input-label>June - {{ $tyear }}</x-input-label>
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                <x-input-label>{{ number_format($junsales, 2); }}</x-input-label>
+                                            </td>
+                                        </tr>
+
+                                        <!-- July -->
+                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th class="px-6 py-4">
+                                                <x-input-label>July - {{ $tyear }}</x-input-label>
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                <x-input-label>{{ number_format($julsales, 2); }}</x-input-label>
+                                            </td>
+                                        </tr>
+
+                                        <!-- August -->
+                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th class="px-6 py-4">
+                                                <x-input-label>August - {{ $tyear }}</x-input-label>
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                <x-input-label>{{ number_format($augsales, 2); }}</x-input-label>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Septermber -->
+                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th class="px-6 py-4">
+                                                <x-input-label>Septermber - {{ $tyear }}</x-input-label>
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                <x-input-label>{{ number_format($septsales, 2); }}</x-input-label>
+                                            </td>
+                                        </tr>
+
+                                        <!-- October -->
+                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th class="px-6 py-4">
+                                                <x-input-label>October - {{ $tyear }}</x-input-label>
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                <x-input-label>{{ number_format($octsales, 2); }}</x-input-label>
+                                            </td>
+                                        </tr>
+
+                                        <!-- November -->
+                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th class="px-6 py-4">
+                                                <x-input-label>November - {{ $tyear }}</x-input-label>
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                <x-input-label>{{ number_format($novsales, 2); }}</x-input-label>
+                                            </td>
+                                        </tr>
+
+                                        <!-- December -->
+                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th class="px-6 py-4">
+                                                <x-input-label>December - {{ $tyear }}</x-input-label>
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                <x-input-label>{{ number_format($decsales, 2); }}</x-input-label>
+                                            </td>
+                                        </tr>
+                         
                                         
                                     </tbody>
                                 </table>
