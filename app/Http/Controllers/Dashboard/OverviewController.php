@@ -67,7 +67,7 @@ class OverviewController extends Controller
             $rpmonth = $rms->rpmonth;
             $rpyear = $rms->rpyear;
         }
-
+        // dd(Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek());
         $thisweek = history_sales::where('userid',auth()->user()->rentersid)
                                             ->where(function(Builder $builder) {            
                                                 $builder->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
