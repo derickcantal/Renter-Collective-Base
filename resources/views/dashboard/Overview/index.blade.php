@@ -39,7 +39,7 @@
                                             <x-input-label>Last 7 Days Total</x-input-label>
                                         </th>
                                         <td class="px-6 py-4">
-                                            <x-input-label>{{ number_format(0, 2); }}</x-input-label>
+                                            <x-input-label>{{ number_format($thisweeksales, 2); }}</x-input-label>
                                         </td>
                                     </tr>
                  

@@ -10,7 +10,7 @@
             {{ __('Rental Payments') }}
         </x-nav-link> -->
         <x-nav-link href="#">
-            {{ __('Weekly Sales Report') }}
+            {{ __('Sales Report') }}
         </x-nav-link>
     </ul>
 </div>

@@ -68,6 +68,15 @@ class OverviewController extends Controller
             $rpyear = $rms->rpyear;
         }
 
+        $thisweek = history_sales::where('userid',auth()->user()->rentersid)
+                                            ->where(function(Builder $builder) {            
+                                                $builder->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
+                                                        ->where('collected_status','Pending');
+                                                })->get();
+
+        $thisweeksales = collect($thisweek)->sum('total');
+
+
         $jan =  history_sales::where('userid',auth()->user()->rentersid)
                                 ->where(function(Builder $builder) use($tyear) {  
                                     $builder->whereYear('created_at', $tyear)
@@ -201,6 +210,7 @@ class OverviewController extends Controller
                             ->with(['octsales' => $octsales])
                             ->with(['novsales' => $novsales])
                             ->with(['decsales' => $decsales])
+                            ->with(['thisweeksales' => $thisweeksales])
                             ->with(['tyear' => $tyear])
                             ->with(['rentalpayments' => $rentalpayments])
                             ->with(['renter_monthly_sale' => $renter_monthly_sales])
