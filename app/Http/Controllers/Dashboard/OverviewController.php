@@ -68,13 +68,28 @@ class OverviewController extends Controller
             $rpyear = $rms->rpyear;
         }
         // dd(Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek());
+        $lastweek = history_sales::where('userid',auth()->user()->rentersid)
+                                            ->where(function(Builder $builder) {            
+                                                $builder->whereBetween('created_at', [Carbon::now()->subWeek()->startOfWeek(), Carbon::now()->subWeek()->endOfWeek()])
+                                                        ->where('collected_status','Pending');
+                                                })->get();
+
+        $lastweeksales = collect($lastweek)->sum('total');
+
+
+
         $thisweek = history_sales::where('userid',auth()->user()->rentersid)
                                             ->where(function(Builder $builder) {            
-                                                $builder->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
+                                                $builder->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->startOfWeek()->addDays(5)])
                                                         ->where('collected_status','Pending');
                                                 })->get();
 
         $thisweeksales = collect($thisweek)->sum('total');
+
+        $lwstartweek = Carbon::now()->subWeek()->startOfWeek()->format('Y-m-d') ;
+        $lwendweek = Carbon::now()->subWeek()->endOfWeek()->format('Y-m-d') ;
+        $curstartweek = Carbon::now()->startOfWeek()->format('Y-m-d') ;
+        $curendweek = Carbon::now()->startOfWeek()->addDays(5)->format('Y-m-d') ;
 
 
         $jan =  history_sales::where('userid',auth()->user()->rentersid)
@@ -211,10 +226,15 @@ class OverviewController extends Controller
                             ->with(['novsales' => $novsales])
                             ->with(['decsales' => $decsales])
                             ->with(['thisweeksales' => $thisweeksales])
+                            ->with(['lastweeksales' => $lastweeksales])
                             ->with(['tyear' => $tyear])
                             ->with(['rentalpayments' => $rentalpayments])
                             ->with(['renter_monthly_sale' => $renter_monthly_sales])
                             ->with(['totalsales' => $totalsales])
+                            ->with(['lwstartweek' => $lwstartweek])
+                            ->with(['lwendweek' => $lwendweek])
+                            ->with(['curstartweek' => $curstartweek])
+                            ->with(['curendweek' => $curendweek])
                             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
