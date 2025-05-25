@@ -80,7 +80,7 @@ class OverviewController extends Controller
 
         $thisweek = history_sales::where('userid',auth()->user()->rentersid)
                                             ->where(function(Builder $builder) {            
-                                                $builder->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->startOfWeek()->addDays(5)])
+                                                $builder->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
                                                         ->where('collected_status','Pending');
                                                 })->get();
 
